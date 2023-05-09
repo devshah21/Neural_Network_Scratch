@@ -17,7 +17,6 @@ output = np.dot(inputs, np.array(weights).T) + bias
 # 4 elements, but the column for the weights is only 3, hence why we have to transpose the
 # weights to make sure the shapes line up
 
-print(output)
 # equivalent to the output variable from main.py
 
 weights1 = [[0.1, -0.14, 0.5], 
@@ -30,7 +29,6 @@ layer1_output = np.dot(inputs, np.array(weights).T) + bias
 
 layer2_output = np.dot(layer1_output, np.array(weights1).T) + bias1
 
-print(layer2_output)
 # in general, output = weight * input + bias
 # similar to y = mx + b
 
@@ -38,10 +36,17 @@ X = [[1, 2, 3, 2.5],
             [2.0, 5.0, -1.0, 2.0],
             [-1.5, 2.7, 3.3, -0.8]]
 
+np.random.seed(0)
+
+
 class Layer_Dense:
 
-    def __init__(self):
+    def __init__(self, n_inputs, n_neurons):
+        self.weights = 0.10 * np.random.randn(n_inputs, n_neurons)
+        self.biases = np.zeros((1, n_neurons))
         pass
-    def forward(self):
-        pass
+    def forward(self, inputs):
+        self.output = np.dot(inputs, self.weights) + self.biases
+
+layer1 = Layer_Dense()
 
