@@ -1,4 +1,6 @@
 import numpy as np
+import nnfs
+from nnfs.datasets import spiral_data
 
 inputs = [[1, 2, 3, 2.5],
             [2.0, 5.0, -1.0, 2.0],
@@ -39,6 +41,9 @@ X = [[1, 2, 3, 2.5],
 np.random.seed(0)
 
 
+### ACTUAL IMPLEMENTATION ###
+
+
 class Layer_Dense:
 
     def __init__(self, n_inputs, n_neurons):
@@ -50,7 +55,26 @@ class Layer_Dense:
         self.output = np.dot(inputs, self.weights) + self.biases
         # y = mx + b code from earlier
 
-    
+class Activation_Relu:
+
+    def forward(self, inputs):
+        self.output = np.maximum(0, inputs)
+        # check activation.py, but the logic is, if something is < 0, we append 0, else we append the value itself
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 layer1 = Layer_Dense(4, 5)
 layer2 = Layer_Dense(5, 2)
