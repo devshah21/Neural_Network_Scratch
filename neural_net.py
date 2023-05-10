@@ -1,6 +1,7 @@
 import numpy as np
 import nnfs
 from nnfs.datasets import spiral_data
+import math
 
 nnfs.init()
 
@@ -9,6 +10,11 @@ X = [[1, 2, 3, 2.5],
             [-1.5, 2.7, 3.3, -0.8]]
 
 X, y = spiral_data(100, 3)
+
+E = math.e
+exp_vals = []
+
+norm_base = sum(exp_vals)
 
 
 class Layer_Dense:
