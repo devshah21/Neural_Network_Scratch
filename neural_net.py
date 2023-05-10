@@ -50,6 +50,8 @@ class Layer_Dense:
         self.output = np.dot(inputs, self.weights) + self.biases
         # y = mx + b code from earlier
 
+    
+
 layer1 = Layer_Dense(4, 5)
 layer2 = Layer_Dense(5, 2)
 
@@ -59,3 +61,4 @@ layer2.forward(layer1.output)
 print(layer2.output)
 
 # sigmoid functions are used as activation as they are more reliaible to calculate loss
+
