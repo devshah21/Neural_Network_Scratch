@@ -9,12 +9,6 @@ X = [[1, 2, 3, 2.5],
             [2.0, 5.0, -1.0, 2.0],
             [-1.5, 2.7, 3.3, -0.8]]
 
-X, y = spiral_data(100, 3)
-
-E = math.e
-exp_vals = []
-
-norm_base = sum(exp_vals)
 
 
 class Layer_Dense:
@@ -34,12 +28,29 @@ class Activation_Relu:
         self.output = np.maximum(0, inputs)
         # check activation.py, but the logic is, if something is < 0, we append 0, else we append the value itself
 
+class Activation_Softmax:
+    def forward(self, inputs):
+        exp_values = np.exp(inputs - np.max(inputs, axis=1, keepdims = True))
+        probs = exp_values / np.sum(exp_values, axis=1, keepdims=True)
+        self.output = probs
 
-layer1 = Layer_Dense(2, 5)
 
+
+X, y = spiral_data(100, 3)
+
+
+
+dense1 = Layer_Dense(2, 3)
 activation1 = Activation_Relu()
 
-layer1.forward(X)
-activation1.forward(layer1.output)
+dense2 = Layer_Dense(3, 3)
+activation2 = Activation_Softmax()
 
-print(activation1.output)
+dense1.forward(X)
+activation1.forward(dense1.output)
+
+dense2.forward(activation1.output)
+activation2.forward(dense2.output)
+
+print(activation2.output[:5])
+
