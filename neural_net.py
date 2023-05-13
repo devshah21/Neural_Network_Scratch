@@ -34,6 +34,29 @@ class Activation_Softmax:
         probs = exp_values / np.sum(exp_values, axis=1, keepdims=True)
         self.output = probs
 
+class Loss:
+
+    def calculate(self, output, y):
+        sample = self.forward(output, y)
+        data_loss = np.mean(sample)
+        return data_loss
+
+class Loss_CategoricalCrossEntropy(Loss):
+    def forward(self, y_pred, y_true):
+        samples = len(y_pred)
+        y_pred_clip = np.clip(y_pred, 1e-7, 1-1e-7)
+
+        if len(y_true.shape) == 1:
+            correct_conf = y_pred_clip[range(samples), y_true]
+        elif len(y_true.shape) == 2:
+            correct_conf = np.sum(y_pred_clip * y_true, axis=1)
+
+        negative_log = -np.log(correct_conf)
+        return negative_log
+
+
+        
+
 
 
 X, y = spiral_data(100, 3)
@@ -54,3 +77,7 @@ activation2.forward(dense2.output)
 
 print(activation2.output[:5])
 
+loss_func = Loss_CategoricalCrossEntropy()
+loss = loss_func.calculate(activation2.output, y)
+
+print(loss)
