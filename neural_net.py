@@ -35,7 +35,7 @@ class Activation_Relu:
         self.output = np.maximum(0, inputs)
         # check activation.py, but the logic is, if something is < 0, we append 0, else we append the value itself
 
-    def backword(self, dvalues):
+    def backward(self, dvalues):
         self.dinputs = dvalues.copy()
         self.dinputs[self.inputs <= 0] = 0
 
@@ -64,6 +64,18 @@ class Loss_CategoricalCrossEntropy(Loss):
 
         negative_log = -np.log(correct_conf)
         return negative_log
+
+    def backward(self, dvalues, y_true):
+        samples = len(dvalues)
+
+        labels = len(dvalues[0])
+
+        if len(y_true.shape) == 1: # turning into one hot vector
+            y_true = np.eye(labels)[y_true]
+
+        self.dinputs = -y_true / dvalues # gradient calculation
+
+        self.dinputs = self.dinputs / samples # normalize 
 
 
         
