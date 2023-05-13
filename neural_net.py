@@ -22,11 +22,22 @@ class Layer_Dense:
         self.output = np.dot(inputs, self.weights) + self.biases
         # y = mx + b code from earlier
 
+    def backword(self, dvalues):
+        self.dweights = np.dot(self.inputs.T, dvalues)
+        self.dbiases = np.sum(dvalues, axis=0, keepdims=True)
+        self.dinputs = np.dot(dvalues, self.weights.T)
+
+
+
 class Activation_Relu:
 
     def forward(self, inputs):
         self.output = np.maximum(0, inputs)
         # check activation.py, but the logic is, if something is < 0, we append 0, else we append the value itself
+
+    def backword(self, dvalues):
+        self.dinputs = dvalues.copy()
+        self.dinputs[self.inputs <= 0] = 0
 
 class Activation_Softmax:
     def forward(self, inputs):
