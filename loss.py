@@ -38,3 +38,5 @@ new_loss = -np.log(soft_outputs[range(len(soft_outputs)), class_targs])
 avg_loss = np.mean(new_loss)
 
 print(new_loss)
+
+# this isn't sufficient as np.mean of 0 is inf
