@@ -19,6 +19,7 @@ class Layer_Dense:
         self.biases = np.zeros((1, n_neurons))
         # create a numpy array of 0s as this is the starting point for the biases
     def forward(self, inputs):
+        self.inputs = inputs
         self.output = np.dot(inputs, self.weights) + self.biases
         # y = mx + b code from earlier
 
