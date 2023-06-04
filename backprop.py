@@ -10,3 +10,10 @@ z = xw + xw1 +xw2
 
 
 y = max(0, z) #applying relu activation
+
+dvalue = 1.0
+
+rulu_dz = (1. if z > 0 else 0.)
+
+drulu_dz = dvalue * rulu_dz #compute derivative of ReLU and the chain rule
+
