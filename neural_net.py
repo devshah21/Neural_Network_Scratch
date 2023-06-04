@@ -22,7 +22,7 @@ class Layer_Dense:
         self.output = np.dot(inputs, self.weights) + self.biases
         # y = mx + b code from earlier
 
-    def backword(self, dvalues):
+    def backward(self, dvalues):
         self.dweights = np.dot(self.inputs.T, dvalues)
         self.dbiases = np.sum(dvalues, axis=0, keepdims=True)
         self.dinputs = np.dot(dvalues, self.weights.T)
@@ -44,6 +44,8 @@ class Activation_Softmax:
         exp_values = np.exp(inputs - np.max(inputs, axis=1, keepdims = True))
         probs = exp_values / np.sum(exp_values, axis=1, keepdims=True)
         self.output = probs
+
+    
 
 class Loss:
 
