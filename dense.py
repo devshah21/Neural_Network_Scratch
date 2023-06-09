@@ -13,5 +13,9 @@ class Dense(Layer):
         return np.dot(self.weights, self.input) + self.bias
     
     def backward(self, output_gradient, learning_rate):
-        pass
+        weights_gradient = np.dot(output_gradient, self.input.T) #derivative of error w/ respect to weights and biases
+        self.weights -= learning_rate * weights_gradient 
+        self.bias -= learning_rate * output_gradient # update values
+        return np.dot(self.weights.T, output_gradient) # return the derivatives of the error w/ respect to the input
+        
     
