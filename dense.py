@@ -18,4 +18,4 @@ class Dense(Layer):
         self.bias -= learning_rate * output_gradient # update values
         return np.dot(self.weights.T, output_gradient) # return the derivatives of the error w/ respect to the input
         
-    
+     
